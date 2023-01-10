@@ -1,30 +1,28 @@
-import data.GeneralRecord;
-import data.IncomeRecord;
-import data.OutcomeRecord;
+import data.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Budget {
-    private List<GeneralRecord> records;
-    List<IncomeRecord> incomes = new ArrayList<>();
-    List<OutcomeRecord> outcomes = new ArrayList<>();;
+class Budget {
+    private List<GeneralRecord> records = new ArrayList<>();
+    private List<IncomeRecord> incomes = new ArrayList<>();
+    private List<OutcomeRecord> outcomes = new ArrayList<>();
+    private List<IncomeRecord> incomesResults = new ArrayList<>();
+    private List<OutcomeRecord> outcomesResults = new ArrayList<>();
 
     void addGeneralRecord(GeneralRecord record) {
-        if (records == null) {
-            records = new ArrayList<>();
-        }
         records.add(record);
     }
 
     List<GeneralRecord> getAllRecords() {
         return records;
     }
+        double getBalance() {
 
-    double getBalance() {
-
-        if (records == null) {
-            return 0d;//TODO something if null
+        if (records.size() == 0) {
+            System.out.print("There is no any records... Balance is: ");
+            return 0d;
         }
 
         double balance = 0d;
@@ -40,9 +38,8 @@ public class Budget {
     }
 
     List<IncomeRecord> getAllIncomes() {
-        if (records == null) {
-            return null;//TODO something if null
-        }
+
+        incomes.clear();
         for (GeneralRecord in : records) {
             if (in instanceof IncomeRecord) {
                 incomes.add((IncomeRecord) in);
@@ -52,9 +49,8 @@ public class Budget {
     }
 
     List<OutcomeRecord> getAllOutcomes() {
-        if (records == null) {
-            return null;//TODO something if null
-        }
+
+        outcomes.clear();
         for (GeneralRecord out : records) {
             if (out instanceof OutcomeRecord) {
                 outcomes.add((OutcomeRecord) out);
@@ -63,4 +59,42 @@ public class Budget {
         return outcomes;
     }
 
+    List<IncomeRecord> getIncomesByCondition(IncomeCategory category, LocalDate date) {
+
+        incomesResults.clear();
+
+        for (IncomeRecord inc : getAllIncomes()) {
+            if (inc.getIncomeCategory().equals(category) && date.equals(inc.getDate())) {
+                incomesResults.add(inc);
+            }
+        }
+        return incomesResults;
+    }
+
+    List<OutcomeRecord> getOutcomesByCondition(OutcomeCategory category, LocalDate date) {
+
+        outcomesResults.clear();
+        for (OutcomeRecord out : getAllOutcomes()) {
+            if (out.getOutcomeCategory().equals(category) && date.equals(out.getDate())) {
+                outcomesResults.add(out);
+            }
+        }
+        return outcomesResults;
+    }
+
+    void deleteByID(int id) {
+
+        int index = -1;
+        for (GeneralRecord rec : records) {
+            if (id == rec.getRecordID()) {
+                index = records.indexOf(rec);
+            }
+        }
+        if (index == -1) {
+            System.out.println("There is no such ID...");
+        } else {
+            records.remove(index);
+            System.out.println("Record ID: " + id + " is removed...");
+        }
+    }
 }

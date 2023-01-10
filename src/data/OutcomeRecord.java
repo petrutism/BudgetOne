@@ -31,6 +31,6 @@ public class OutcomeRecord extends GeneralRecord {
     @Override
     public String toString() {
 
-        return "OutcomeRecord ID=" + recordID + ". " + super.toString() + ": outcomeCategory=" + outcomeCategory + ", outcomeType=" + outcomeType + "\n";
+        return "OutcomeRecord ID=" + recordID + ". " + super.toString() + ", outcomeCategory=" + outcomeCategory + ", outcomeType=" + outcomeType + "\n";
     }
 }

@@ -60,8 +60,7 @@ public class GeneralRecord {
         return "sum=" + sum +
                 ", date=" + date +
                 ", person=" + person +
-                ", transferStatus=" + transferStatus +
-                '}';
+                ", transferStatus=" + transferStatus;
     }
 
     @Override

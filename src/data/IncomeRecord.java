@@ -30,6 +30,6 @@ public class IncomeRecord extends GeneralRecord {
 
     @Override
     public String toString() {
-        return "IncomeRecord ID=" + recordID+ ". " + super.toString() +  ": incomeCategory=" + incomeCategory + ", isBankTransfer=" + isBankTransfer + "\n";
+        return "IncomeRecord ID=" + recordID+ ". " + super.toString() +  ", incomeCategory=" + incomeCategory + ", isBankTransfer=" + isBankTransfer + "\n";
     }
 }
